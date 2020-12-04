@@ -1,0 +1,35 @@
+﻿
+<style>
+    body {
+        background-color: #ffffff;
+        ;
+    }
+</style>
+
+<div class="container" style="background-color:rgba(239,239,239,0.95); border-radius:25px; padding:15px;width:600px;">
+
+    <h3>Não é Possivel Cadastrar o Veiculo -- Já esta locado </h3>
+   
+    <div class="container" style="background-color:rgba(239,239,239,0.95); border-radius:10px; padding:20px;width:350px;">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td style="width:50px"><button type="button" onclick="Cancelar()" class="btn btn-block btn-default">OK</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    @*<div class="container" style="background-color:rgba(239,239,239,0.95); border-radius:25px; padding:15px;width:400px;">
+            <button type="button" onclick="Cancelar()" class="btn btn-block btn-default">Cancelar</button>
+            <button type="button" onclick="Excluir(@vId)" class="btn btn-block btn-danger">Excluir</button>
+        </div>*@
+</div>
+<script>
+   
+    function Cancelar() {
+        window.location.href = "../Movimento/IndexMovimento";
+    }
+
+</script>

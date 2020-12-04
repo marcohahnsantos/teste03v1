@@ -1,0 +1,118 @@
+﻿@model MovimentoModel
+@using System.ComponentModel.DataAnnotations;
+@using PagedList;
+@using PagedList.Core.Mvc;
+@using cloudscribe.Web.Pagination;
+@using TESTEAO3.Util;
+<link href="~/css/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewData["Title"] = "Movimentação Abate";
+    var NrBate = ViewBag.NrAbate.ToString();
+
+    NrBate = NrBate.PadLeft(5, '0');
+    var Empresa = ViewBag.RegistroAbate.EMPRESA.ToString();
+    var Quantidade = ViewBag.RegistroAbate.QUANTIDADE.ToString();
+    Quantidade = Quantidade.PadLeft(4, '0');
+    Validacoes.Codigo_Abate = ViewBag.NrAbate.ToString();
+}
+
+<style>
+    body {
+         background-color: #ffffff;;
+    }
+</style>
+<div class="container" style="background-color:rgba(239,239,239,0.95); border-radius:10px; padding:20px;width:1100px;">
+
+
+
+
+    <form asp-controller="Movimento" asp-action="VerMovimento">
+        <h2>Meus Abates</h2>
+        <div class="form-group">
+            <label font size="+2" face="Verdana">Nº ABATE          :@NrBate</label>
+            <label>    </label>
+            <label>EMPRESA  :@Empresa</label>
+            <br />
+            <label>FORNECEDOR  :@ViewBag.RegistroAbate.FORNECEDOR</label>
+            <br />
+            <label>QUANTIDADE    :@Quantidade</label>
+            <label>               DATA  :@ViewBag.RegistroAbate.DATA</label>
+        </div>
+    </form>
+</div>
+<div class="container" style="background-color:rgba(239,239,239,0.95); border-radius:10px; padding:20px;width:1100px;">
+
+    <form asp-controller="Movimento" asp-action="VerMovimento">
+        <h3>Abates</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>CÓDIGO</th>
+                    <th>TAG</th>
+                    <th>PESO</th>
+                    <th>DATA</th>
+                </tr>
+            </thead>
+
+            @{ foreach (var item in (List<MovimentoModel>)ViewBag.ListaMovimentoAbate)
+                {
+                    <tbody>
+                        <tr>
+                            @{
+                                if (@item.ID != 0)
+                                {
+                                    <td style="width=50px">@item.ID.ToString()</td>
+                                    <td style="width=50px">@item.MARCA.ToString()</td>
+                                    <td style="width=50px">@item.MODELO.ToString()</td>
+                                    <td style="width=50px">@item.DATA_ANO_MODELO.ToString()</td>
+                                }
+                            }
+                        </tr>
+                    </tbody>
+                }
+            }
+        </table>
+
+        <div class="container" style="background-color:rgba(239,239,239,0.95); border-radius:10px; padding:20px;width:1000px;">
+            <table class="table table-bordered" align="center" style="width:500px;">
+                <tbody>
+                    <tr>
+                        <td style="width:50px"><button type="submit" asp-action="VisualizarComoPdf" class="btn btn-block btn-primary" onclick="NovaAba()">Gerar PDF</button></td>
+                        <td style="width:50px"><button type="button" class="btn btn-block btn-primary" onclick="Voltar()">Voltar</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+<form>
+    <div>
+        <cs-pager cs-paging-pagesize="5"
+                  cs-paging-pagenumber="@ViewBag.CurrentPage"
+                  cs-paging-totalitems="@ViewBag.TotalItems"
+                  cs-pagenumber-param="page"
+                  cs-show-first-last="true"
+                  cs-suppress-empty-nextprev="true"
+                  cs-suppress-inactive-firstlast="true"
+                  cs-first-page-text="Primeiro"
+                  cs-last-page-text="Ultimo"
+                  cs-pager-li-current-class="active"
+                  cs-pager-li-non-active-class="disabled"
+                  asp-controller="Movimento"
+                  asp-action="PesquisarMovimento">
+        </cs-pager>
+
+    </div>
+</form>
+
+<script>
+
+    function Voltar() {
+        window.location.href = "../IndexMovimento"
+    }
+    function NovaAba() {
+        Window.location.href = "../Home/Menu";
+    }
+</script>
+
+<s

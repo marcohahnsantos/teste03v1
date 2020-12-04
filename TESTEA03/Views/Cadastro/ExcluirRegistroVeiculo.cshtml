@@ -1,0 +1,52 @@
+﻿
+<style>
+    body {
+        background-color: #ffffff;
+    }
+</style>
+
+<div class="container" style="background-color:rgba(239,239,239,0.95); border-radius:25px; padding:15px;width:400px;">
+
+    <h3>Deseja Excluir o Veículo Selecionado?</h3>
+    <p><strong>Marca:</strong> @ViewBag.Registro.Marca.ToString()</p>
+    <p><strong>Modelo:</strong> @ViewBag.Registro.Modelo.ToString()</p>
+    <p><strong>Placa:</strong> @ViewBag.Registro.Placa.ToString()</p>
+    <p><strong>Ano Modelo:</strong> @ViewBag.Registro.AnoModelo.ToString()</p>
+    <p><strong>Ano Fabricação:</strong> @ViewBag.Registro.AnoFabricacao.ToString()</p>
+    @{
+        var vId = 0;
+
+        try
+        {
+            vId = int.Parse(ViewBag.Registro.Id.ToString());
+        }
+        catch { }
+    }
+    <div class="container" style="background-color:rgba(239,239,239,0.95); border-radius:10px; padding:20px;width:350px;">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td style="width:50px"><button type="button" onclick="Cancelar()" class="btn btn-block btn-default">Cancelar</button></td>
+                    <td style="width:50px"> <button type="button" onclick="Excluir(@vId)" class="btn btn-block btn-danger">Excluir</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    @*<div class="container" style="background-color:rgba(239,239,239,0.95); border-radius:25px; padding:15px;width:400px;">
+            <button type="button" onclick="Cancelar()" class="btn btn-block btn-default">Cancelar</button>
+            <button type="button" onclick="Excluir(@vId)" class="btn btn-block btn-danger">Excluir</button>
+        </div>*@
+</div>
+<script>
+        function Excluir(id) {
+            window.location.href = "../ExcluirVeiculo/" + id;
+
+        }
+        function Cancelar() {
+            window.location.href = "../IndexVeiculos";
+        }
+
+</script>
+

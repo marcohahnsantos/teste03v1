@@ -1,0 +1,58 @@
+﻿
+@model UsuarioModel
+@{
+    Layout = "../Shared/_LayoutLogin.cshtml";
+
+}
+<style>
+    body {
+         background-color: #ffffff;;
+        
+    }
+</style>
+
+@*<style >
+        body {
+            background-image: url('../../images/Bg.png')repeating-linear-gradient();
+        }
+    </style>*@
+
+<div class="container" style="background-color:rgba(239,239,239,0.95); border-radius:10px; padding:20px;width:500px;">
+    @{
+        @*try
+        {
+            if (TempData["MensagemLoginInvalido"].ToString() != null )
+            {
+                <div class="alert alert-danger">
+                    <strong>Atenção!</strong> @TempData["MensagemLoginInvalido"]
+                </div>
+            }
+        }
+        catch { }*@
+    }
+                <form asp-controller="Usuario" asp-action="ValidarLogin">
+                    <div class="form-group">
+                        <label for="email">Email :</label>
+                        <input type="email" class="form-control" asp-for="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Senha:</label>
+                        <input type="password" class="form-control" asp-for="Senha">
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox"> Lembrar meu acesso</label>
+                    </div>
+                    @*<button  type="button" class="btn btn-primary" onclick="javascript: window.location.href='~/Usuario/Registrar'">Registrar</button>*@
+                    <button asp-controller="Usuario" asp-action="Registrar" type="submit" class="btn btn-primary">Registrar</button>
+                    <button type="submit" class="btn btn-success">Entrar</button>
+                </form>
+</div>
+<script>
+    function Registro() {
+        window.location.href = "../Usuario/Registrar";
+
+    }
+    function Voltar() {
+        window.location.href = "../Home/Menu"
+    }
+</script>

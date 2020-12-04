@@ -1,0 +1,157 @@
+﻿@using TESTEAO3.Util;
+@model Cadastro;
+@*<style>
+        body {
+            background-image: url('../../images/Bg.png')
+        }
+    </style>*@
+<style>
+    body {
+        background-color: #ffffff;
+        ;
+    }
+</style>
+<div class="container" style="background-color:rgba(239,239,239,0.95); border-radius:10px; padding:20px;width:1000px;">
+
+    <h2>Cadastrar Veículo</h2>
+    <br />
+    @{
+        var vId = 0;
+        var vModelo = "";
+        var vMarca = "";
+        var vPlaca = "";
+        var vAnoModelo = "";
+        var vAnoFabricacao = "";
+
+        try
+        {
+            vId = int.Parse(ViewBag.Registro.Id.ToString());
+            if (vId != 0)
+            {
+                vModelo = ViewBag.Registro.Modelo.ToString();
+                vMarca = ViewBag.Registro.Marca.ToString();
+                vPlaca = ViewBag.Registro.Placa.ToString();
+                vAnoModelo = ViewBag.Registro.AnoModelo.ToString();
+                vAnoFabricacao = ViewBag.Registro.AnoFabricacao.ToString();
+            }
+        }
+        catch
+        {
+
+        }
+    }
+    <script src="~/js/site.js"></script>
+    <form asp-controller="Cadastro" asp-action="Registrar" autocomplete="on">
+        <input type="hidden" asp-for="Id" value="@vId" />
+        <div class="container" style="background-color:rgba(239,239,239,0.95); border-radius:25px; padding:15px;width:950px;">
+            <table border="1">
+                <td width=300><label>  MARCA</label></td>
+                <td width=600>
+                    <select asp-for="Marca" class="form-control" onchange="marca()">
+                        @{
+                            foreach (var item in (List<Marcas>)ViewBag.ListaVeiculos)
+                            {
+                                if (item.name.Trim() == Validacoes.MarcaVeiculo)
+                                {
+                                    <option value="@item.id.ToString()'-'@item.name.ToString()" selected>@item.name.ToString()</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.id.ToString()'-'@item.name.ToString()">@item.name.ToString()</option>
+                                }
+                            }
+                        }
+                    </select>
+                </td>
+            </table>
+            <table border="1">
+                <td width=300><label>   MODELO</label></td>
+                <td width=600>
+                    <select asp-for="Modelo" class="form-control">
+                        @{
+                            foreach (var item in (List<Modelos>)ViewBag.ListaModelos)
+                            {
+                                if (item.name.Trim() == vModelo)
+                                {
+                                    <option value="@item.id.ToString()'-'@item.name.ToString()" selected>@item.name.ToString()</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.id.ToString()'-'@item.name.ToString()">@item.name.ToString()</option>
+                                }
+                            }
+                        }
+                    </select>
+                </td>
+            </table>
+            <table border="1">
+                <td width=300><label>  PLACA</label></td>
+                <td width=100>
+                    <input type="text" name="Placa" id="Placa" value="@vPlaca" onkeyup="formatar('#######', this)"
+                           maxlength="8" class="form-control" required>
+                    <span asp-validation-for="Placa" class="text-danger"></span>
+                </td>
+            </table>
+            <table border="1">
+                <td width=300><label>   ANO MODELO</label></td>
+                <td width=100>
+                    <input type="text" name="AnoModelo" id="AnoModelo" value="@vAnoModelo" onkeyup="formatar('####', this)"
+                           maxlength="4" class="form-control" onkeypress="return SomenteNumero(event)" required>
+                    <span asp-validation-for="AnoModelo" class="text-danger"></span>
+                </td>
+            </table>
+            <table border="1">
+                <td width=300><label>   ANO FABRICACAO</label></td>
+                <td width=100>
+                    <input type="text" name="AnoFabricacao" id="AnoFabricacao" value="@vAnoFabricacao" onkeyup="formatar('####', this)"
+                           maxlength="4" class="form-control" onkeypress="return SomenteNumero(event)" required>
+                    <span asp-validation-for="AnoFabricacao" class="text-danger"></span>
+                </td>
+            </table>
+            <div class="form-group">
+                <label>Data  (Inicio):</label>
+                <input style="width:150px" type="date" asp-for="Data_Ini" value="@System.DateTime.Now.ToString("yyyy-MM-dd")" />
+                <label>Data   (Final):</label>
+                <input style="width:150px" type="date" asp-for="Data_Fim" value="@System.DateTime.Now.ToString("yyyy-MM-dd")" />
+
+
+            </div>
+
+            </table>
+            <div class="container" style="background-color:rgba(239,239,239,0.95); border-radius:10px; padding:20px;width:500px;">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td style="width:50px"><button type="submit" class="btn btn-block btn-success">Registrar</button></td>
+                            @if (ViewBag.Editar == "SIM")
+                            {
+                                <td style="width:50px"><button type="button" class="btn btn-block btn-primary" onclick="VoltarEditar()">Voltar</button></td>
+                            }
+                            else
+                            {
+                                <td style="width:50px"><button type="button" class="btn btn-block btn-primary" onclick="Voltar()">Voltar</button></td>
+                            }
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    function Voltar() {
+        window.location.href = "../Cadastro/IndexVeiculos"
+    }
+    function VoltarEditar() {
+        window.location.href = "../IndexIndexVeiculos"
+    }
+
+    function marca() {
+        var marcaValue = $(Marca).val();
+        window.location.href = "../RegistrarMarca/" +marcaValue;
+    }
+</script>
+
+
+
+

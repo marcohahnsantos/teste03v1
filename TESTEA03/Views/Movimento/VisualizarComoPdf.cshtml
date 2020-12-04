@@ -1,0 +1,68 @@
+﻿@using TESTEAO3.Util;
+@{
+    var CarregaHeader = 1;
+    var Contador = 1;
+    var Pagina = 0;
+    ViewData["Title"] = "Movimentação Abate";
+    var NrAbate = Validacoes.Codigo_Abate;
+    NrAbate = NrAbate.PadLeft(5, '0');
+    int peso = 0;
+    int total = 0;
+    //var Empresa = ViewBag.RegistroAbate.EMPRESA.ToString();
+    //var Quantidade = ViewBag.RegistroAbate.QUANTIDADE.ToString();
+    //Quantidade = Quantidade;
+}
+
+@{
+    <br>
+    <br>
+    <br>
+
+    foreach (var item in Model)
+    {
+        //if (CarregaHeader == Contador)
+        //{
+        @*<h2>ABATES REALIZADOS</h2>
+            <td>ABATE      : @NrAbate*@
+        @*EMPRESA : @Empresa</td>
+            @*<td>FORNECEDOR :@ViewBag.RegistroAbate.FORNECEDOR</td>
+            <td>QUANTIDADE : @ViewBag.Quantidade   DATA:ViewBag.RegistroAbate.DATA</td>*@
+        @*<td>═══════════════════════════════════════════════════════════════════════════════════<</td>
+                <br />
+                <td>| CODIGO    DATA                                   TAG                   PESO                                       </td>
+                <br />
+                <td>═══════════════════════════════════════════════════════════════════════════════════</td>
+                <br />
+                if (Contador == 1)
+                {
+                    CarregaHeader = CarregaHeader + 53;
+                }
+                else
+                {
+                    CarregaHeader = CarregaHeader + 58;
+                }
+
+                Pagina = Pagina + 1;
+            }*@
+
+        //Contador = Contador + 1;*@
+
+        <table>
+            <tr>
+                <td>@item.Id.ToString().PadRight(20, ' ') </td>
+                <td width="160">@item.DATA.ToString()</td>
+                <td width="120">@item.TAG.ToString()</td>
+                <td width="160" align="right">@item.PESO.ToString()</td>
+
+            </tr>
+        </table>
+        peso = int.Parse(item.PESO.ToString());
+
+        total =peso+ total;
+
+    }
+<br />
+<td align="left">TOTAL : @total.ToString().PadLeft(59, '_')</td>
+
+}
+

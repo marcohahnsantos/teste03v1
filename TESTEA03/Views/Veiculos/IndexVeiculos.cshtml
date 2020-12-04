@@ -1,0 +1,88 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+@*<style>
+        body {
+            background-image: url('../../images/Bg.png')
+        }
+    </style>*@
+<style>
+    body {
+         background-color: #ffffff;;
+    }
+</style>
+
+<div class="container" style="background-color:rgba(239,239,239,0.95); border-radius:10px; padding:20px;width:1000px;">
+    <form asp-controller="Cadastro" asp-action="Registrar">
+        <h3>Empresas</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>#</th>
+                    <th>CÓDIGO</th>
+                    <th>CNPJ</th>
+                    <th>EMPRESA</th>
+                    <th>ENDEREÇO</th>
+                    <th>CIDADE</th>
+                    <th>UF</th>
+                </tr>
+            </thead>
+            @{
+                foreach (var item in (List<Cadastro>)ViewBag.ListaCadastro)
+                {
+                    <tbody>
+                        <tr>
+                            @{
+                                if (@item.Id != 0)
+                                {
+                                    <td style="width:100px"><button type="button" class="btn btn-success" onclick="Editar(@item.Id.ToString())">Editar</button></td>
+                                    <td style="width:100px"><button type="button" class="btn btn-danger" onclick="ExcluirRegistro(@item.Id.ToString())">Excluir</button></td>
+                                    <td style="width:50px">@item.Id.ToString()</td>
+                                    <td>@item.CpfCnpj.ToString().PadLeft(18, ' ')</td>
+                                    <td>@item.Descricao.ToString()</td>
+                                    <td>@item.Endereco.ToString()</td>
+                                    <td>@item.Cidade.ToString()</td>
+                                    <td>@item.Uf.ToString()</td>
+                                }
+                            }
+                        </tr>
+                    </tbody>
+                }
+            }
+        </table>
+    </form>
+</div>
+
+<div class="container" style="background-color:rgba(239,239,239,0.95); border-radius:10px; padding:20px;width:1000px;">
+    <table class="table table-bordered" align="center" style="width:500px;">
+        <tbody>
+            <tr>
+                <td style="width:50px"><button type="button" class="btn btn-block btn-primary" onclick="CriarRegistro()">Criar Empresa</button></td>
+                @if (ViewBag.Editar == "SIM")
+                {
+                    <td style="width:50px"><button type="button" class="btn btn-block btn-primary" onclick="VoltarEditar()">Voltar</button></td>
+                }
+                else
+                {
+                    <td style="width:50px"><button type="button" class="btn btn-block btn-primary" onclick="Voltar()">Voltar</button></td>
+                }
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function CriarRegistro() {
+        window.location.href = "../Cadastro/RegistrarEmpresa"
+    }
+    function Voltar() {
+        window.location.href = "../Home/Menu"
+    }
+    function ExcluirRegistro(id_conta) {
+        window.location.href = "../Cadastro/ExcluirRegistroEmpresa/" + id_conta;
+    }
+    function Editar(id_conta) {
+        window.location.href = "../Cadastro/RegistrarEmpresa/" + id_conta;
+    }
+</script>

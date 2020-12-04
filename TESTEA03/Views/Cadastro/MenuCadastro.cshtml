@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewData["Title"] = "Menu";
+}
+@*@using Microsoft.AspNetCore.Http.Features
+
+    @{
+        var consentFeature = Context.Features.Get<ITrackingConsentFeature>();
+        var showBanner = !consentFeature?.CanTrack ?? false;
+        var cookieString = consentFeature?.CreateConsentCookie();
+    }*@
+<style>
+    body {
+         background-color: #ffffff;;
+    }
+</style>
+@*<style>
+        body {
+            background-image: url('../../images/Bg.png')
+        }
+    </style>*@
+
+<br />
+<br />
+<br />
+
+
+<div class="container" style="background-color:rgba(239,239,239,0.95); border-radius:10px; padding:10px;width:1000px;">
+
+    <div class="row">
+
+        <a href="../Cadastro/IndexVeiculos">
+            <div class="col-lg-4  text-center">
+                <img src="~/images/carro3.png" with="20%" />
+                <h3>Veiculos</h3>
+            </div>
+        </a>
+
+        <!--<-->@*a href="../Cadastro/IndexProdutor">
+            <div class="col-lg-4  text-center">
+                <img src="~/images/Fornecedor.png" with="20%" />
+                <h3>Produtor / Fornecedores</h3>
+            </div>
+        </a>*@
+        @*<a href="../PlanoConta/Index">
+                    <div class="col-lg-4 text-center">
+                        <img src="~/images/cofre.png" with="20%" />
+                        <h3>Centro de Custos</h3>
+                    </div>
+                </a>
+                <a href="../Transacao/Index">
+                    <div class="col-lg-4 text-center">
+                        <img src="~/images/cartao.png" with="20%" />
+                        <h3>Registrar Transação</h3>
+                    </div>
+                </a>
+            </div>
+            <br /><br /><br /><br />
+            <div class="row">
+                <a href="../FormaPgto/Index">
+                    <div class="col-lg-4  text-center">
+                        <img src="~/images/pago.png" with="20%" />
+                        <h3>Forma Pagamento</h3>
+                    </div>
+                </a>
+                <a href="../Transacao/Extrato">
+                    <div class="col-lg-4 text-center">
+                        <img src="~/images/cofregrande.png" with="20%" />
+                        <h3>Extrato</h3>
+                    </div>
+                </a>
+                <a href="../Transacao/Dashboard">
+                    <div class="col-lg-4  text-center">
+                        <img src="~/images/grafico.png" with="20%" />
+                        <h3 text-center>Dashboard</h3>
+                    </div>
+                </a>
+            </div>
+            <br /><br /><br /><br />
+            <div class="row">
+                <a href="../Relatorios/Menu">
+                    <div class="col-lg-4  text-center">
+                        <img src="~/images/impressora.png" with="20%" />
+                        <h3 text-center>Relatórios</h3>
+                    </div>
+                </a>
+
+
+
+            </div>*@
+    </div>
+</div>

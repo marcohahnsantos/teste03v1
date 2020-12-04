@@ -1,0 +1,176 @@
+﻿@using TESTEAO3.Util;
+@model MovimentoModel;
+@*<style>
+        body {
+            background-image: url('../../images/Bg.png')
+        }
+    </style>*@
+<style>
+    body {
+        background-color: #ffffff;
+        ;
+    }
+</style>
+<div class="container" style="background-color:rgba(239,239,239,0.95); border-radius:10px; padding:20px;width:1000px;">
+
+    <h2>Cadastrar Locação</h2>
+    <br />
+    @{
+        var vId = 0;
+        var vCpf = "";
+        var vIdVeiculo = "";
+        var vModelo = "";
+        var vMarca = "";
+        var vNome = "";
+        var vDataReserva = "";
+        var vDataInicio = "";
+        var vDataFim = "";
+        var vPlaca = "";
+        var vAnoModelo = "";
+        var vAnoFabricacao = "";
+        var vStatus = "";
+        try
+        {
+            vId = int.Parse(ViewBag.Registro.ID.ToString());
+            if (vId != 0)
+            {
+                vCpf = ViewBag.Registro.CPF_LOCATORIO.ToString();
+                vNome = ViewBag.Registro.NOME_LOCATORIO.ToString();
+                vIdVeiculo = ViewBag.Registro.ID_VEICULO.ToString();
+                vDataReserva = DateTime.Parse(ViewBag.Registro.DATA_RESERVA.ToString()).ToString("yyyy-MM-dd");
+                vDataInicio = DateTime.Parse(ViewBag.Registro.Data_Ini.ToString()).ToString("yyyy-MM-dd");
+                vDataFim = DateTime.Parse(ViewBag.Registro.Data_Fim.ToString()).ToString("yyyy-MM-dd");
+                vStatus = ViewBag.Registro.SATUS_LOCACAO.ToString();
+            }
+        }
+        catch (Exception erro)
+        {
+
+        }
+        vMarca = ViewBag.Registro.MARCA;
+        vModelo = ViewBag.Registro.MODELO;
+        vPlaca = ViewBag.Registro.PLACA;
+        vAnoModelo = ViewBag.Registro.DATA_ANO_MODELO;
+        vAnoFabricacao = ViewBag.Registro.DATA_ANO_FABRICACAO;
+    }
+    <script src="~/js/site.js"></script>
+    <form asp-controller="Movimento" asp-action="Registrar" autocomplete="on">
+        <input type="hidden" asp-for="ID" value="@vId" />
+        <div class="container" style="background-color:rgba(239,239,239,0.95); border-radius:25px; padding:15px;width:950px;">
+            <table border="1">
+                <td width=300><label> CPF</label></td>
+                <td width=300>
+                    <input type="text" name="CPF" id="CPF" value="@vCpf" onkeyup="formatar('###.###.###-##', this)"
+                           maxlength="14" class="form-control" onkeypress="return SomenteNumero(event)" required>
+                    <span asp-validation-for="CPF_LOCATORIO" class="text-danger"></span>
+                </td>
+            </table>
+            <table border="1">
+                <td width=300><label> NOME</label></td>
+                <td width=600>
+                    <input type="text" name="NOME" id="Nome" value="@vNome" , this)"
+                           maxlength="50" class="form-control" required>
+                    <span asp-validation-for="NOME_LOCATORIO" class="text-danger"></span>
+                </td>
+            </table>
+            <table border="1">
+                <td width=300><label>   MARCA</label></td>
+                <td width=600>
+                    <input type="text" name=Marca" id="Marca" value="@vMarca" ,this)"
+                           maxlength="4" class="form-control" onkeypress="return SomenteNumero(event)" required>
+                    <span asp-validation-for="MARCA" class="text-danger"></span>
+                </td>
+            </table>
+            <table border="1">
+                <td width=300><label>   MODELO</label></td>
+                <td width=600>
+                    <input type="text" name=Modelo" id="Modelo" value="@vModelo" ,this)"
+                           maxlength="4" class="form-control" onkeypress="return SomenteNumero(event)" required>
+                    <span asp-validation-for="MODELO" class="text-danger"></span>
+                </td>
+            </table>
+            <table border="1">
+                <td width=300><label>DATA RESERVA </label></td>
+                <td width=155>
+                    <input style="width:150px" size="50" name="DataLocacao" id="DataLocacao" type="date" asp-validation-for="DATA_RESERVA" value="@vDataReserva" ,this)" />
+                    <span asp-validation-for="DATA_RESERVA" class="text-danger"></span>
+                <td>
+            </table>
+            <table border="1">
+                <td width=300><label>  DATA LOCAÇÃO </label></td>
+                <td width=485>
+
+                    <label size="50">Data  (Inicio):</label>
+                    <input style="width:150px" size="50" name="DataIni" type="date" asp-for="Data_Ini" value="@vDataInicio" ,this)" />
+                    <label>Data   (Final):</label>
+                    <input style="width:150px" type="date" name="DataFim" asp-for="Data_Fim" value="@vDataFim" ,this)" />
+                <td>
+            </table>
+
+
+
+
+            <table border="1">
+                <td width=300><label>   ANO MODELO</label></td>
+                <td width=100>
+                    <input type="text" name="AnoModelo" id="AnoModelo" value="@vAnoModelo" onkeyup="formatar('####', this)"
+                           maxlength="4" class="form-control" onkeypress="return SomenteNumero(event)" required>
+                    <span asp-validation-for="DATA_ANO_MODELO" class="text-danger"></span>
+                </td>
+            </table>
+            <table border="1">
+                <td width=300><label>   ANO FABRICACAO</label></td>
+                <td width=100>
+                    <input type="text" name="AnoFabricacao" id="AnoFabricacao" value="@vAnoFabricacao" onkeyup="formatar('####', this)"
+                           maxlength="4" class="form-control" onkeypress="return SomenteNumero(event)" required>
+                    <span asp-validation-for="DATA_ANO_FABRICACAO" class="text-danger"></span>
+                </td>
+            </table>
+            <table border="1">
+                <td width=300><label>   STATUS</label></td>
+                <td width=100>
+                    <input type="text" name="Status" id="status" value="@vStatus" , this)"
+                           maxlength="24" class="form-control" onkeypress="return SomenteNumero(event)" required>
+                    <span asp-validation-for="SATUS_LOCACAO" class="text-danger"></span>
+                </td>
+            </table>
+
+            </table>
+            <div class="container" style="background-color:rgba(239,239,239,0.95); border-radius:10px; padding:20px;width:500px;">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td style="width:50px"><button type="submit" class="btn btn-block btn-success">Registrar</button></td>
+                            <td style="width:50px"><button type="button" class="btn btn-block btn-primary" onclick="Voltar()">Voltar</button></td>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+<script>
+ 
+    function marca() {
+        var marcaValue = $(Marca).val();
+        window.location.href = "../RegistraMovimentos/" + marcaValue?@vCpf?@vNome?@vDataReserva?@vDataInicio?@vDataFim?@vStatus;
+   }
+</script>
+
+<script>
+    
+    function Voltar() {
+        window.location.href = "../IndexMovimento"
+    }
+
+</script>
+
+
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}

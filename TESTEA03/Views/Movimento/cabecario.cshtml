@@ -1,0 +1,26 @@
+﻿
+@using TESTEAO3.Util;
+@{
+    var CarregaHeader = 1;
+    var Contador = 1;
+    var Pagina = 0;
+    ViewData["Title"] = "Movimentação Abate";
+    var NrAbate = Validacoes.Codigo_Abate;
+    NrAbate = NrAbate.PadLeft(5, '0');
+    //var Empresa = ViewBag.RegistroAbate.EMPRESA.ToString();
+    //var Quantidade = ViewBag.RegistroAbate.QUANTIDADE.ToString();
+    //Quantidade = Quantidade;
+}
+<h2>ABATES REALIZADOS</h2>
+<td>
+    ABATE      : @NrAbate
+    @*EMPRESA : @Empresa*@
+</td>
+@*<td>FORNECEDOR :@ViewBag.RegistroAbate.FORNECEDOR</td>
+    <td>QUANTIDADE : @ViewBag.Quantidade   DATA:ViewBag.RegistroAbate.DATA</td>*@
+<td>═══════════════════════════════════════════════════════════════════════════════════<</td>
+<br />
+<td>| CODIGO    DATA                                   TAG                   PESO                                       </td>
+<br />
+<td>═══════════════════════════════════════════════════════════════════════════════════</td>
+
